@@ -23,12 +23,12 @@
             {
                 context.Customers.Remove(customer);
                 context.SaveChanges();
-                response.Message = ResponeMessage.Deleted;
+                response.Message = ResponseMessage.Deleted;
             }
             catch (DbUpdateException ex)
             {
                 // add logger here
-                response.Message = ResponeMessage.Error;
+                response.Message = ResponseMessage.Error;
             }
             
             return response;

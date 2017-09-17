@@ -1,9 +1,10 @@
 ﻿namespace core.template.logic.Helper
 {
-    public enum ResponeMessage
+    public enum ResponseMessage
     {
         None,
         Error,
-        Deleted
+        Deleted,
+        NotFound,
     }
 }
