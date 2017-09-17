@@ -3,6 +3,7 @@
     using AutoMapper;
     using core.template.domain;
     using core.template.logic.Commands.Customer.Create;
+    using core.template.logic.Commands.Item.Create;
 
     public class Configuration
     {
@@ -11,7 +12,8 @@
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<CustomerCreateCommand, Customer>();
-                
+                cfg.CreateMap<ItemCreateCommand, Item>();
+
             });
         }
     }

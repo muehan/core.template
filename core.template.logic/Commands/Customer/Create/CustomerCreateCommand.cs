@@ -1,7 +1,6 @@
 ﻿namespace core.template.logic.Commands.Customer.Create
 {
     using MediatR;
-    using core.template.domain;
 
     public class CustomerCreateCommand : IRequest<CustomerCreateResponse>
     {

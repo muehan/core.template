@@ -14,4 +14,11 @@
     <ProjectReference Include="..\core.template.domain\core.template.domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\Item\Edit\" />
+    <Folder Include="Commands\Item\Delete\" />
+    <Folder Include="Queries\Item\GetAll\" />
+    <Folder Include="Queries\Item\Query\" />
+  </ItemGroup>
+
 </Project>

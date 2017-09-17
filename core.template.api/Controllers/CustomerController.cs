@@ -3,12 +3,12 @@
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
     using MediatR;
-    using core.template.logic.Queries.Customer.GetAll;
     using System.Threading.Tasks;
     using core.template.domain;
-    using core.template.logic.Queries.Customer.Query;
     using core.template.logic.Commands.Customer.Create;
     using core.template.logic.Commands.Customer.Edit;
+    using core.template.logic.Queries.Customer.GetAll;
+    using core.template.logic.Queries.Customer.Query;
     using core.template.logic.Commands.Customer.Delete;
 
     [Route("api/[controller]")]
@@ -54,7 +54,7 @@
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public async Task<logic.Commands.Customer.Edit.CustomerEditResponse> Put(int id, [FromBody]CustomerEditCommand customerCommand)
+        public async Task<CustomerEditResponse> Put(int id, [FromBody]CustomerEditCommand customerCommand)
         {
             var response = await mediator.Send(customerCommand);
 

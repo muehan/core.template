@@ -6,11 +6,11 @@
     using MediatR;
     using System;
 
-    public class CustomerCreateHandler : IRequestHandler<CustomerCreateCommand, CustomerCreateResponse>
+    public class ItemCreateHandler : IRequestHandler<CustomerCreateCommand, CustomerCreateResponse>
     {
         private readonly DemoContext context;
 
-        public CustomerCreateHandler()
+        public ItemCreateHandler()
         {
             context = new DemoContext();
         }
