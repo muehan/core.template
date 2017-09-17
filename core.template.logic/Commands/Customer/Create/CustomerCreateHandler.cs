@@ -5,7 +5,6 @@
     using core.template.domain;
     using MediatR;
     using System;
-    using System.Data.SqlClient;
 
     public class CustomerCreateHandler : IRequestHandler<CustomerCreateCommand, CustomerCreateResponse>
     {
