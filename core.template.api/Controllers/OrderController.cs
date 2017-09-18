@@ -10,7 +10,7 @@
     using core.template.logic.Queries.Order.GetAll;
 
     [Produces("application/json")]
-    [Route("api/Basket")]
+    [Route("api/Order")]
     public class OrderController : Controller
     {
         private readonly IMediator mediator;
@@ -20,6 +20,7 @@
             this.mediator = mediator;
         }
 
+        [HttpGet("{id}")]
         public async Task<Order> Get(Guid id)
         {
             var query = new OrderGetByIdQuery();
@@ -30,6 +31,7 @@
             return response.Order;
         }
 
+        [HttpGet]
         public async Task<IEnumerable<Order>> Get()
         {
             var query = new OrderGetAllQuery();
