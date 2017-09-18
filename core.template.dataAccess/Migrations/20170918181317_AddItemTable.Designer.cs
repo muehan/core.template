@@ -11,9 +11,10 @@ using System;
 namespace core.template.dataAccess.Migrations
 {
     [DbContext(typeof(DemoContext))]
-    partial class DemoContextModelSnapshot : ModelSnapshot
+    [Migration("20170918181317_AddItemTable")]
+    partial class AddItemTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,42 +87,11 @@ namespace core.template.dataAccess.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("core.template.domain.OrderItem", b =>
-                {
-                    b.Property<Guid>("Guid")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Amount");
-
-                    b.Property<Guid?>("ItemGuid");
-
-                    b.Property<Guid?>("OrderGuid");
-
-                    b.HasKey("Guid");
-
-                    b.HasIndex("ItemGuid");
-
-                    b.HasIndex("OrderGuid");
-
-                    b.ToTable("OrderItems");
-                });
-
             modelBuilder.Entity("core.template.domain.Order", b =>
                 {
                     b.HasOne("core.template.domain.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerGuid");
-                });
-
-            modelBuilder.Entity("core.template.domain.OrderItem", b =>
-                {
-                    b.HasOne("core.template.domain.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemGuid");
-
-                    b.HasOne("core.template.domain.Order")
-                        .WithMany("Items")
-                        .HasForeignKey("OrderGuid");
                 });
 #pragma warning restore 612, 618
         }

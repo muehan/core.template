@@ -11,9 +11,10 @@ using System;
 namespace core.template.dataAccess.Migrations
 {
     [DbContext(typeof(DemoContext))]
-    partial class DemoContextModelSnapshot : ModelSnapshot
+    [Migration("20170918181453_OrderItemRenaming")]
+    partial class OrderItemRenaming
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,9 +80,15 @@ namespace core.template.dataAccess.Migrations
 
                     b.Property<int>("Number");
 
+                    b.Property<Guid?>("OrderItemGuid");
+
                     b.HasKey("Guid");
 
                     b.HasIndex("CustomerGuid");
+
+                    b.HasIndex("OrderItemGuid")
+                        .IsUnique()
+                        .HasFilter("[OrderItemGuid] IS NOT NULL");
 
                     b.ToTable("Orders");
                 });
@@ -91,17 +98,11 @@ namespace core.template.dataAccess.Migrations
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Amount");
-
                     b.Property<Guid?>("ItemGuid");
-
-                    b.Property<Guid?>("OrderGuid");
 
                     b.HasKey("Guid");
 
                     b.HasIndex("ItemGuid");
-
-                    b.HasIndex("OrderGuid");
 
                     b.ToTable("OrderItems");
                 });
@@ -111,6 +112,10 @@ namespace core.template.dataAccess.Migrations
                     b.HasOne("core.template.domain.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerGuid");
+
+                    b.HasOne("core.template.domain.OrderItem")
+                        .WithOne("Order")
+                        .HasForeignKey("core.template.domain.Order", "OrderItemGuid");
                 });
 
             modelBuilder.Entity("core.template.domain.OrderItem", b =>
@@ -118,10 +123,6 @@ namespace core.template.dataAccess.Migrations
                     b.HasOne("core.template.domain.Item", "Item")
                         .WithMany()
                         .HasForeignKey("ItemGuid");
-
-                    b.HasOne("core.template.domain.Order")
-                        .WithMany("Items")
-                        .HasForeignKey("OrderGuid");
                 });
 #pragma warning restore 612, 618
         }
