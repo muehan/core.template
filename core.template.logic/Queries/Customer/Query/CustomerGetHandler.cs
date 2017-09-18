@@ -17,29 +17,9 @@ namespace core.template.logic.Queries.Customer.Query
         {
             var response = new CustomerGetResponse();
 
-            var customers = context.Customers.Where(x => x.Number.ToString() == message.QueryText);
-
-            if (customers.Any())
-            {
-                response.Customers = customers;
-                return response;
-            }
-
-            customers = context.Customers.Where(x => x.Name == message.QueryText);
-
-            if (customers.Any())
-            {
-                response.Customers = customers;
-                return response;
-            }
-
-            customers = context.Customers.Where(x => x.PreName == message.QueryText);
-
-            if (customers.Any())
-            {
-                response.Customers = customers;
-                return response;
-            }
+            response.Customers = context.Customers.Where(x => x.Number.ToString() == message.QueryText);
+            response.Customers.ToList().AddRange(context.Customers.Where(x => x.Name == message.QueryText));
+            response.Customers.ToList().AddRange(context.Customers.Where(x => x.PreName == message.QueryText));
             
             return response;
         }
