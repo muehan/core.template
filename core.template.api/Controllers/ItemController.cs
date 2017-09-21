@@ -1,8 +1,10 @@
-﻿using core.template.domain;
-using core.template.logic.Commands.Item.Create;
+﻿using core.template.logic.Commands.Item.Create;
+using core.template.logic.Commands.Item.Delete;
+using core.template.logic.Commands.Item.Edit;
+using core.template.logic.Queries.Item.GetAll;
+using core.template.logic.Queries.Item.Query;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace core.template.api.Controllers
@@ -19,56 +21,48 @@ namespace core.template.api.Controllers
 
         // GET api/values
         [HttpGet]
-        public async Task<IEnumerable<Item>> Get()
+        public async Task<ItemGetAllResponse> Get()
         {
-            //var command = new CustomerGetAllQuery();
-            //var response = await mediator.Send(command);
-
-            //return response.Customers;
-            return null;
+            var command = new ItemGetAllQuery();
+            var response = await mediator.Send(command);
+            
+            return response;
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public async Task<IEnumerable<Item>> Get(int id)
+        public async Task<ItemGetResponse> Get(ItemGetQuery query)
         {
-            //var command = new CustomerGetQuery();
-            //command.QueryText = id.ToString();
-
-            //var response = await mediator.Send(command);
-
-            //return response.Customers;
-            return null;
+            var response = await mediator.Send(query);
+            
+            return response;
         }
 
         // POST api/values
         [HttpPost]
-        public async Task<ItemCreateResponse> Post([FromBody]ItemCreateCommand itemCommand)
+        public async Task<ItemCreateResponse> Post([FromBody]ItemCreateCommand command)
         {
-            var response = await mediator.Send(itemCommand);
+            var response = await mediator.Send(command);
 
             return response;
         }
 
         // PUT api/values/5
-        //[HttpPut("{id}")]
-        //public async Task<logic.Commands.Customer.Edit.CustomerEditResponse> Put(int id, [FromBody]CustomerEditCommand customerCommand)
-        //{
-        //    var response = await mediator.Send(customerCommand);
+        [HttpPut("{id}")]
+        public async Task<ItemEditResponse> Put(int id, [FromBody]ItemEditCommand command)
+        {
+            var response = await mediator.Send(command);
 
-        //    return response;
-        //}
+            return response;
+        }
 
         // DELETE api/values/5
-        //[HttpDelete("{id}")]
-        //public async Task<CustomerDeleteResponse> Delete(int id)
-        //{
-        //    var command = new CustomerDeleteCommand();
-        //    command.Id = id;
+        [HttpDelete("{id}")]
+        public async Task<ItemDeleteResponse> Delete(ItemDeleteCommand command)
+        {
+            var response = await mediator.Send(command);
 
-        //    var response = await mediator.Send(command);
-
-        //    return response;
-        //}
+            return response;
+        }
     }
 }
