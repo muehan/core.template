@@ -35,6 +35,7 @@
 
             services.AddCors(s => s.AddPolicy("policy", builder =>
             {
+                builder.WithOrigins(new[] { "https://coretemplate.apphb.com/*", "http:localhost:3000" });
                 builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
             }));
         }
