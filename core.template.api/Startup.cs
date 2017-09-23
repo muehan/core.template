@@ -35,14 +35,14 @@
 
             services.AddCors(s => s.AddPolicy("policy", builder =>
             {
-                builder.WithOrigins(new[] { "https://coretemplate.apphb.com/*", "http:localhost:3000" });
-                builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
             }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors("policy");
             new Configuration().MapperConfiguration();
 
             if (env.IsDevelopment())
@@ -51,7 +51,6 @@
             }
 
             app.UseMvc();
-
             app.UseSwagger(c =>
             {
                 c.PreSerializeFilters.Add((swaggerDoc, httpReq) => swaggerDoc.Host = httpReq.Host.Value);
