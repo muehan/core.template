@@ -10,6 +10,7 @@
     using core.template.logic.Queries.Customer.GetAll;
     using core.template.logic.Queries.Customer.Query;
     using core.template.logic.Commands.Customer.Delete;
+    using System;
 
     [Route("api/[controller]")]
     public class CustomerController : Controller
@@ -54,7 +55,7 @@
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public async Task<CustomerEditResponse> Put(int id, [FromBody]CustomerEditCommand customerCommand)
+        public async Task<CustomerEditResponse> Put(Guid id, [FromBody]CustomerEditCommand customerCommand)
         {
             var response = await mediator.Send(customerCommand);
 
@@ -63,7 +64,7 @@
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public async Task<CustomerDeleteResponse> Delete(int id)
+        public async Task<CustomerDeleteResponse> Delete(Guid id)
         {
             var command = new CustomerDeleteCommand();
             command.Id = id;
