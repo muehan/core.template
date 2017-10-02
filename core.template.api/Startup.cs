@@ -13,6 +13,7 @@
     using System.Reflection;
     using MediatR.Pipeline;
     using core.template.logic.Behaviors;
+    using StructureMap;
 
     public class Startup
     {
@@ -26,10 +27,27 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var container = new Container();
+            container.Configure(cfg =>
+            {
+                cfg.Scan(scanner =>
+                {
+                    scanner.AssemblyContainingType(typeof(Startup));
+                    scanner.AssemblyContainingType(typeof(CustomerGetHandler));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncRequestHandler<,>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(ICancellableAsyncRequestHandler<,>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(INotificationHandler<>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncNotificationHandler<>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(ICancellableAsyncNotificationHandler<>));
+                    scanner.WithDefaultConventions();
+                });
+
+                cfg.For(typeof(IPipelineBehavior<,>)).Add(typeof(LoggingBehavior<,>));
+                cfg.For(typeof(IPipelineBehavior<,>)).Add(typeof(PostProcessingBehavior<,>));
+                cfg.For(typeof(IPipelineBehavior<,>)).Add(typeof(PreProcessingBehavior<,>));
+            });
             
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PostProcessingBehavior<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PreProcessingBehavior<,>));
             services.AddMediatR(typeof(CustomerGetHandler).GetTypeInfo().Assembly);
 
             services.AddMvc();
@@ -45,6 +63,8 @@
             {
                 builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
             }));
+
+            container.Populate(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
