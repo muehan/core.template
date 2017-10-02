@@ -33,7 +33,7 @@ namespace core.template.api.Controllers
 
         // GET api/values/5
         [HttpGet("id")]
-        public async Task<ItemGetResponse> Get(string id)
+        public async Task<ItemGetResponse> Get(Guid id)
         {
             var response = await mediator.Send(new ItemGetQuery { QueryText = id });
             
