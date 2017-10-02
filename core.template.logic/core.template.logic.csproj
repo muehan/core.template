@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\core.template.dataAccess\core.template.dataAccess.csproj" />
     <ProjectReference Include="..\core.template.domain\core.template.domain.csproj" />
+    <ProjectReference Include="..\core.template.infrastructure\core.template.infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

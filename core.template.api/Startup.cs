@@ -2,6 +2,7 @@
 {
     using core.template.dataAccess;
     using core.template.logic;
+    using core.template.logic.PipeLine;
     using core.template.logic.Queries.Customer.Query;
     using MediatR;
     using Microsoft.AspNetCore.Builder;
@@ -10,6 +11,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using Swashbuckle.AspNetCore.Swagger;
     using System.Reflection;
+    using MediatR.Pipeline;
+    using core.template.logic.Behaviors;
 
     public class Startup
     {
@@ -23,7 +26,12 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PostProcessingBehavior<,>));
+            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PreProcessingBehavior<,>));
             services.AddMediatR(typeof(CustomerGetHandler).GetTypeInfo().Assembly);
+
             services.AddMvc();
             services.AddDbContext<DemoContext>();
             services.AddDbContext<DemoContextReadOnly>();

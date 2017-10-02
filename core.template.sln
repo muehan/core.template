@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core.template.api", "core.template.api\core.template.api.csproj", "{7C966C23-5E86-4345-8EBA-B66BED454A23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core.template.api", "core.template.api\core.template.api.csproj", "{7C966C23-5E86-4345-8EBA-B66BED454A23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core.template.logic", "core.template.logic\core.template.logic.csproj", "{3DE057E5-2948-4424-AF21-D8838518ECB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core.template.logic", "core.template.logic\core.template.logic.csproj", "{3DE057E5-2948-4424-AF21-D8838518ECB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core.template.domain", "core.template.domain\core.template.domain.csproj", "{F9348E08-A210-4421-8E3B-CD2E6846D9B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core.template.domain", "core.template.domain\core.template.domain.csproj", "{F9348E08-A210-4421-8E3B-CD2E6846D9B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core.template.dataAccess", "core.template.dataAccess\core.template.dataAccess.csproj", "{FFC5DD79-6A1E-4B7F-B9A2-65AC44CA1C32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core.template.dataAccess", "core.template.dataAccess\core.template.dataAccess.csproj", "{FFC5DD79-6A1E-4B7F-B9A2-65AC44CA1C32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core.template.infrastructure", "core.template.infrastructure\core.template.infrastructure.csproj", "{12AC300F-0608-40F3-A9C4-C3CDE0C4A991}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{FFC5DD79-6A1E-4B7F-B9A2-65AC44CA1C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFC5DD79-6A1E-4B7F-B9A2-65AC44CA1C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFC5DD79-6A1E-4B7F-B9A2-65AC44CA1C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12AC300F-0608-40F3-A9C4-C3CDE0C4A991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12AC300F-0608-40F3-A9C4-C3CDE0C4A991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12AC300F-0608-40F3-A9C4-C3CDE0C4A991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12AC300F-0608-40F3-A9C4-C3CDE0C4A991}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
