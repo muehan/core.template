@@ -18,9 +18,16 @@
         {
             var response = new ItemGetResponse();
 
-            response.Items = context.Items.Where(x => x.Name.Contains(message.QueryText));
-            response.Items.ToList().AddRange(context.Items.Where(x => x.Number.ToString().Contains(message.QueryText)));
-            response.Items.ToList().AddRange(context.Items.Where(x => x.VenderNumber.ToString().Contains(message.QueryText)));
+            if (message.Guid != null)
+            {
+                response.Items = new[] { this.context.Items.Find(message.Guid) };
+            }
+            else
+            {
+                response.Items = context.Items.Where(x => x.Name.Contains(message.QueryText));
+                response.Items.ToList().AddRange(context.Items.Where(x => x.Number.ToString().Contains(message.QueryText)));
+                response.Items.ToList().AddRange(context.Items.Where(x => x.VenderNumber.ToString().Contains(message.QueryText)));
+            }
 
             return response;
         }

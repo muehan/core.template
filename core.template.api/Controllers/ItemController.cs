@@ -35,7 +35,7 @@ namespace core.template.api.Controllers
         [HttpGet("id")]
         public async Task<ItemGetResponse> Get(Guid id)
         {
-            var response = await mediator.Send(new ItemGetQuery { QueryText = id });
+            var response = await mediator.Send(new ItemGetQuery { Guid = id });
             
             return response;
         }
