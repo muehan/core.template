@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace core.template.api.Controllers
 {
+    using System;
+
     [Route("api/[controller]")]
     public class ItemController : Controller
     {
@@ -30,10 +32,10 @@ namespace core.template.api.Controllers
         }
 
         // GET api/values/5
-        [HttpGet]
-        public async Task<ItemGetResponse> Get([FromBody]ItemGetQuery query)
+        [HttpGet("text")]
+        public async Task<ItemGetResponse> Get(string text)
         {
-            var response = await mediator.Send(query);
+            var response = await mediator.Send(new ItemGetQuery { QueryText = text });
             
             return response;
         }
