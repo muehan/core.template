@@ -49,7 +49,7 @@ namespace core.template.api.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public async Task<ItemEditResponse> Put(int id, [FromBody]ItemEditCommand command)
+        public async Task<ItemEditResponse> Put([FromBody]ItemEditCommand command)
         {
             var response = await mediator.Send(command);
 
