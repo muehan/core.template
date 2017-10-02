@@ -30,8 +30,8 @@ namespace core.template.api.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public async Task<ItemGetResponse> Get(ItemGetQuery query)
+        [HttpGet]
+        public async Task<ItemGetResponse> Get([FromBody]ItemGetQuery query)
         {
             var response = await mediator.Send(query);
             
