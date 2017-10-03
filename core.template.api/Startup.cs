@@ -1,19 +1,18 @@
 ﻿namespace core.template.api
 {
-    using core.template.dataAccess;
-    using core.template.logic;
-    using core.template.logic.PipeLine;
-    using core.template.logic.Queries.Customer.Query;
+    using System;
+    using dataAccess;
     using MediatR;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Swashbuckle.AspNetCore.Swagger;
-    using System.Reflection;
     using MediatR.Pipeline;
-    using core.template.logic.Behaviors;
+    using services.queries.Queries.Customer.Query;
     using StructureMap;
+    using core.template.services.behaviors.Behaviors;
+    using services.commands.Configuration;
 
     public class Startup
     {
@@ -25,30 +24,10 @@
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            var container = new Container();
-            container.Configure(cfg =>
-            {
-                cfg.Scan(scanner =>
-                {
-                    scanner.AssemblyContainingType(typeof(Startup));
-                    scanner.AssemblyContainingType(typeof(CustomerGetHandler));
-                    scanner.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>));
-                    scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncRequestHandler<,>));
-                    scanner.ConnectImplementationsToTypesClosing(typeof(ICancellableAsyncRequestHandler<,>));
-                    scanner.ConnectImplementationsToTypesClosing(typeof(INotificationHandler<>));
-                    scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncNotificationHandler<>));
-                    scanner.ConnectImplementationsToTypesClosing(typeof(ICancellableAsyncNotificationHandler<>));
-                    scanner.WithDefaultConventions();
-                });
-
-                cfg.For(typeof(IPipelineBehavior<,>)).Add(typeof(LoggingBehavior<,>));
-                cfg.For(typeof(IPipelineBehavior<,>)).Add(typeof(PostProcessingBehavior<,>));
-                cfg.For(typeof(IPipelineBehavior<,>)).Add(typeof(PreProcessingBehavior<,>));
-            });
-            
-            services.AddMediatR(typeof(CustomerGetHandler).GetTypeInfo().Assembly);
+           
+            //services.AddMediatR(typeof(CustomerGetHandler).GetTypeInfo().Assembly);
 
             services.AddMvc();
             services.AddDbContext<DemoContext>();
@@ -63,15 +42,52 @@
             {
                 builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
             }));
+            
+            return ConfigureIoC(services);
+        }
 
-            container.Populate(services);
+        private IServiceProvider ConfigureIoC(IServiceCollection services)
+        {
+            var container = new Container();
+            container.Configure(cfg =>
+            {
+                cfg.Scan(scanner =>
+                {
+                    scanner.AssemblyContainingType(typeof(Startup));
+                    scanner.AssemblyContainingType(typeof(services.behaviors.Configuration.MapperConfiguration));
+                    scanner.AssemblyContainingType(typeof(services.commands.Configuration.MapperConfiguration));
+                    scanner.AssemblyContainingType(typeof(services.queries.Configuration.MapperConfiguration));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<>)); // Handlers with no response
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IRequestHandler<,>)); // Handlers with a response
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncRequestHandler<>)); // Async handlers with no response
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncRequestHandler<,>)); // Async Handlers with a response
+                    scanner.ConnectImplementationsToTypesClosing(typeof(INotificationHandler<>));
+                    scanner.ConnectImplementationsToTypesClosing(typeof(IAsyncNotificationHandler<>));
+                    scanner.WithDefaultConventions();
+                });
+
+                cfg.For(typeof(IPipelineBehavior<,>)).Add(typeof(RequestPreProcessorBehavior<,>));
+                cfg.For(typeof(IPipelineBehavior<,>)).Add(typeof(RequestPostProcessorBehavior<,>));
+
+                cfg.For(typeof(IRequestPreProcessor<>)).Add(typeof(PreProcessingBehavior<>));
+                cfg.For(typeof(IPipelineBehavior<,>)).Add(typeof(LoggingBehavior<,>));
+                cfg.For(typeof(IRequestPostProcessor<,>)).Add(typeof(PostProcessingBehavior<,>));
+
+                cfg.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t)).ContainerScoped();
+                cfg.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t)).ContainerScoped();
+                cfg.For<IMediator>().Use<Mediator>();
+
+                cfg.Populate(services);
+            });
+
+            return container.GetInstance<IServiceProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseCors("policy");
-            new Configuration().MapperConfiguration();
+            new MapperConfiguration().Config();
 
             if (env.IsDevelopment())
             {

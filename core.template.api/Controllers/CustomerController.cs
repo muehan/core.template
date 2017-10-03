@@ -4,13 +4,13 @@
     using Microsoft.AspNetCore.Mvc;
     using MediatR;
     using System.Threading.Tasks;
-    using core.template.domain;
-    using core.template.logic.Commands.Customer.Create;
-    using core.template.logic.Commands.Customer.Edit;
-    using core.template.logic.Queries.Customer.GetAll;
-    using core.template.logic.Queries.Customer.Query;
-    using core.template.logic.Commands.Customer.Delete;
+    using domain;
     using System;
+    using services.commands.Commands.Customer.Create;
+    using services.commands.Commands.Customer.Delete;
+    using services.commands.Commands.Customer.Edit;
+    using services.queries.Queries.Customer.GetAll;
+    using services.queries.Queries.Customer.Query;
 
     [Route("api/[controller]")]
     public class CustomerController : Controller

@@ -1,15 +1,15 @@
-﻿using core.template.logic.Commands.Item.Create;
-using core.template.logic.Commands.Item.Delete;
-using core.template.logic.Commands.Item.Edit;
-using core.template.logic.Queries.Item.GetAll;
-using core.template.logic.Queries.Item.Query;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace core.template.api.Controllers
 {
     using System;
+    using services.queries.Queries.Item.GetAll;
+    using services.queries.Queries.Item.Query;
+    using services.commands.Commands.Item.Create;
+    using services.commands.Commands.Item.Delete;
+    using services.commands.Commands.Item.Edit;
 
     [Route("api/[controller]")]
     public class ItemController : Controller

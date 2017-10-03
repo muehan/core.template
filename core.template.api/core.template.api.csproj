@@ -24,8 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\core.template.dataAccess\core.template.dataAccess.csproj" />
     <ProjectReference Include="..\core.template.domain\core.template.domain.csproj" />
-    <ProjectReference Include="..\core.template.logic\core.template.logic.csproj" />
+    <ProjectReference Include="..\core.template.services.behaviors\core.template.services.behaviors.csproj" />
+    <ProjectReference Include="..\core.template.services.commands\core.template.services.commands.csproj" />
+    <ProjectReference Include="..\core.template.services.queries\core.template.services.queries.csproj" />
   </ItemGroup>
 
 </Project>

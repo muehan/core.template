@@ -1,13 +1,13 @@
 ﻿namespace core.template.api.Controllers
 {
-    using core.template.domain;
-    using core.template.logic.Queries.Order.Get;
+    using domain;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;
     using MediatR;
     using System.Collections.Generic;
-    using core.template.logic.Queries.Order.GetAll;
+    using services.queries.Queries.Order.Get;
+    using services.queries.Queries.Order.GetAll;
 
     [Produces("application/json")]
     [Route("api/Order")]
