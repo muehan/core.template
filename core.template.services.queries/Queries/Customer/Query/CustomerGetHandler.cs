@@ -8,9 +8,9 @@
     {
         private readonly DemoContextReadOnly context;
 
-        public CustomerGetHandler()
+        public CustomerGetHandler(DemoContextReadOnly context)
         {
-            this.context = new DemoContextReadOnly();
+            this.context = context;
         }
 
         public CustomerGetResponse Handle(CustomerGetQuery message)

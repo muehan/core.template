@@ -9,9 +9,9 @@
     {
         private readonly DemoContext context;
 
-        public CustomerEditHandler()
+        public CustomerEditHandler(DemoContext context)
         {
-            this.context = new DemoContext();
+            this.context = context;
         }
 
         public CustomerEditResponse Handle(CustomerEditCommand message)

@@ -9,9 +9,9 @@
     {
         private readonly DemoContext context;
 
-        public ItemDeleteHandler()
+        public ItemDeleteHandler(DemoContext context)
         {
-            this.context = new DemoContext();
+            this.context = context;
         }
 
         public ItemDeleteResponse Handle(ItemDeleteCommand message)

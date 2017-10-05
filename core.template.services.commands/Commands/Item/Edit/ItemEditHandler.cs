@@ -8,9 +8,9 @@
     {
         private readonly DemoContext context;
 
-        public ItemEditHandler()
+        public ItemEditHandler(DemoContext context)
         {
-            this.context = new DemoContext();
+            this.context = context;
         }
 
         public ItemEditResponse Handle(ItemEditCommand message)

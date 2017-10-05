@@ -10,9 +10,9 @@
         private readonly DemoContext context;
         private Object lockObject = new Object();
 
-        public OrderCreateHandler()
+        public OrderCreateHandler(DemoContext context)
         {
-            this.context = new DemoContext();
+            this.context = context;
         }
 
         public OrderCreateResponse Handle(OrderCreateCommand message)

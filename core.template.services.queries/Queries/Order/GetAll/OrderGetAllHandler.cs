@@ -7,9 +7,9 @@
     {
         private readonly DemoContextReadOnly context;
 
-        public OrderGetAllHandler()
+        public OrderGetAllHandler(DemoContextReadOnly context)
         {
-            this.context = new DemoContextReadOnly();
+            this.context = context;
         }
 
         public OrderGetAllResponse Handle(OrderGetAllQuery message)

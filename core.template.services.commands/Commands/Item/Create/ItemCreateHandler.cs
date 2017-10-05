@@ -10,9 +10,9 @@
     {
         private readonly DemoContext context;
 
-        public ItemCreateHandler()
+        public ItemCreateHandler(DemoContext context)
         {
-            this.context = new DemoContext();
+            this.context = context;
         }
 
         public ItemCreateResponse Handle(ItemCreateCommand message)

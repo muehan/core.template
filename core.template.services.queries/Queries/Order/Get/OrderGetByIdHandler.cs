@@ -8,9 +8,9 @@ namespace core.template.services.queries.Queries.Order.Get
     {
         private readonly DemoContextReadOnly context;
 
-        public OrderGetByIdHandler()
+        public OrderGetByIdHandler(DemoContextReadOnly context)
         {
-            this.context = new DemoContextReadOnly();
+            this.context = context;
         }
 
         public OrderGetByIdResponse Handle(OrderGetByIdQuery message)

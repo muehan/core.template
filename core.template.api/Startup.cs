@@ -73,6 +73,9 @@
                 cfg.For(typeof(IPipelineBehavior<,>)).Add(typeof(LoggingBehavior<,>));
                 cfg.For(typeof(IRequestPostProcessor<,>)).Add(typeof(PostProcessingBehavior<,>));
 
+                cfg.For<DemoContext>().Use(_ => new DemoContext());
+                cfg.For<DemoContextReadOnly>().Use(_ => new DemoContextReadOnly());
+
                 cfg.For<SingleInstanceFactory>().Use<SingleInstanceFactory>(ctx => t => ctx.GetInstance(t)).ContainerScoped();
                 cfg.For<MultiInstanceFactory>().Use<MultiInstanceFactory>(ctx => t => ctx.GetAllInstances(t)).ContainerScoped();
                 cfg.For<IMediator>().Use<Mediator>();

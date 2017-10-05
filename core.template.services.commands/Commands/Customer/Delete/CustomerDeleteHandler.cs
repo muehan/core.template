@@ -9,9 +9,9 @@
     {
         private readonly DemoContext context;
 
-        public CustomerDeleteHandler()
+        public CustomerDeleteHandler(DemoContext context)
         {
-            this.context = new DemoContext();
+            this.context = context;
         }
 
         public CustomerDeleteResponse Handle(CustomerDeleteCommand message)
