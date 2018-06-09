@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.AspNetCore.SpaServices.AngularCli;
     using Swashbuckle.AspNetCore.Swagger;
     using MediatR.Pipeline;
     using services.queries.Queries.Customer.Query;
@@ -26,7 +27,6 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-           
             //services.AddMediatR(typeof(CustomerGetHandler).GetTypeInfo().Assembly);
 
             services.AddMvc();
@@ -42,7 +42,13 @@
             {
                 builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
             }));
-            
+
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
+
             return ConfigureIoC(services);
         }
 
@@ -97,6 +103,8 @@
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
             app.UseMvc();
             app.UseSwagger(c =>
             {
@@ -106,6 +114,19 @@
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
             });
         }
     }

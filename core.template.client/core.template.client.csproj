@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <PublishDir>$(OutDir)_PublishedWebsites\NetCoreWebApp\</PublishDir>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETCOREAPP;NETCOREAPP2_0</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +18,8 @@
     <PackageReference Include="MediatR" Version="3.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="2.8.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
     <PackageReference Include="StructureMap.Microsoft.DependencyInjection" Version="1.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="1.0.0" />

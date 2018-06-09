@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core.template.api", "core.template.api\core.template.api.csproj", "{7C966C23-5E86-4345-8EBA-B66BED454A23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core.template.client", "core.template.client\core.template.client.csproj", "{7C966C23-5E86-4345-8EBA-B66BED454A23}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "core.template.domain", "core.template.domain\core.template.domain.csproj", "{F9348E08-A210-4421-8E3B-CD2E6846D9B3}"
 EndProject
