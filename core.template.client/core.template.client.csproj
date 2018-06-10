@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\file.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -36,6 +40,10 @@
     <ProjectReference Include="..\core.template.services.behaviors\core.template.services.behaviors.csproj" />
     <ProjectReference Include="..\core.template.services.commands\core.template.services.commands.csproj" />
     <ProjectReference Include="..\core.template.services.queries\core.template.services.queries.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\file.ts" />
   </ItemGroup>
 
 </Project>

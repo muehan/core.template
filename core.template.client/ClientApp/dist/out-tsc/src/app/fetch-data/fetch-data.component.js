@@ -14,22 +14,22 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
-var FetchDataComponent = (function () {
+var FetchDataComponent = /** @class */ (function () {
     function FetchDataComponent(http, baseUrl) {
         var _this = this;
         http.get(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(function (result) {
             _this.forecasts = result;
         }, function (error) { return console.error(error); });
     }
+    FetchDataComponent = __decorate([
+        core_1.Component({
+            selector: 'app-fetch-data',
+            templateUrl: './fetch-data.component.html'
+        }),
+        __param(1, core_1.Inject('BASE_URL')),
+        __metadata("design:paramtypes", [http_1.HttpClient, String])
+    ], FetchDataComponent);
     return FetchDataComponent;
 }());
-FetchDataComponent = __decorate([
-    core_1.Component({
-        selector: 'app-fetch-data',
-        templateUrl: './fetch-data.component.html'
-    }),
-    __param(1, core_1.Inject('BASE_URL')),
-    __metadata("design:paramtypes", [http_1.HttpClient, String])
-], FetchDataComponent);
 exports.FetchDataComponent = FetchDataComponent;
 //# sourceMappingURL=fetch-data.component.js.map

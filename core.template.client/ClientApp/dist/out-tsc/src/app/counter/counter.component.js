@@ -7,20 +7,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var CounterComponent = (function () {
+var CounterComponent = /** @class */ (function () {
     function CounterComponent() {
         this.currentCount = 0;
     }
     CounterComponent.prototype.incrementCounter = function () {
         this.currentCount++;
     };
+    CounterComponent = __decorate([
+        core_1.Component({
+            selector: 'app-counter-component',
+            templateUrl: './counter.component.html'
+        })
+    ], CounterComponent);
     return CounterComponent;
 }());
-CounterComponent = __decorate([
-    core_1.Component({
-        selector: 'app-counter-component',
-        templateUrl: './counter.component.html'
-    })
-], CounterComponent);
 exports.CounterComponent = CounterComponent;
 //# sourceMappingURL=counter.component.js.map

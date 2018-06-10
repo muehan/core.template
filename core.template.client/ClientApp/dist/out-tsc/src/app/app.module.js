@@ -16,33 +16,33 @@ var nav_menu_component_1 = require("./nav-menu/nav-menu.component");
 var home_component_1 = require("./home/home.component");
 var counter_component_1 = require("./counter/counter.component");
 var fetch_data_component_1 = require("./fetch-data/fetch-data.component");
-var AppModule = (function () {
+var AppModule = /** @class */ (function () {
     function AppModule() {
     }
+    AppModule = __decorate([
+        core_1.NgModule({
+            declarations: [
+                app_component_1.AppComponent,
+                nav_menu_component_1.NavMenuComponent,
+                home_component_1.HomeComponent,
+                counter_component_1.CounterComponent,
+                fetch_data_component_1.FetchDataComponent
+            ],
+            imports: [
+                platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+                http_1.HttpClientModule,
+                forms_1.FormsModule,
+                router_1.RouterModule.forRoot([
+                    { path: '', component: home_component_1.HomeComponent, pathMatch: 'full' },
+                    { path: 'counter', component: counter_component_1.CounterComponent },
+                    { path: 'fetch-data', component: fetch_data_component_1.FetchDataComponent },
+                ])
+            ],
+            providers: [],
+            bootstrap: [app_component_1.AppComponent]
+        })
+    ], AppModule);
     return AppModule;
 }());
-AppModule = __decorate([
-    core_1.NgModule({
-        declarations: [
-            app_component_1.AppComponent,
-            nav_menu_component_1.NavMenuComponent,
-            home_component_1.HomeComponent,
-            counter_component_1.CounterComponent,
-            fetch_data_component_1.FetchDataComponent
-        ],
-        imports: [
-            platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-            http_1.HttpClientModule,
-            forms_1.FormsModule,
-            router_1.RouterModule.forRoot([
-                { path: '', component: home_component_1.HomeComponent, pathMatch: 'full' },
-                { path: 'counter', component: counter_component_1.CounterComponent },
-                { path: 'fetch-data', component: fetch_data_component_1.FetchDataComponent },
-            ])
-        ],
-        providers: [],
-        bootstrap: [app_component_1.AppComponent]
-    })
-], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

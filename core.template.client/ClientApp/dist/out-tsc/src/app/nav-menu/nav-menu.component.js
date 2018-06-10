@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var NavMenuComponent = (function () {
+var NavMenuComponent = /** @class */ (function () {
     function NavMenuComponent() {
         this.isExpanded = false;
     }
@@ -17,14 +17,14 @@ var NavMenuComponent = (function () {
     NavMenuComponent.prototype.toggle = function () {
         this.isExpanded = !this.isExpanded;
     };
+    NavMenuComponent = __decorate([
+        core_1.Component({
+            selector: 'app-nav-menu',
+            templateUrl: './nav-menu.component.html',
+            styleUrls: ['./nav-menu.component.css']
+        })
+    ], NavMenuComponent);
     return NavMenuComponent;
 }());
-NavMenuComponent = __decorate([
-    core_1.Component({
-        selector: 'app-nav-menu',
-        templateUrl: './nav-menu.component.html',
-        styleUrls: ['./nav-menu.component.css']
-    })
-], NavMenuComponent);
 exports.NavMenuComponent = NavMenuComponent;
 //# sourceMappingURL=nav-menu.component.js.map
