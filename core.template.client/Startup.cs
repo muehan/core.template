@@ -1,4 +1,6 @@
-﻿namespace core.template.api
+﻿using System.Linq;
+
+namespace core.template.api
 {
     using System;
     using dataAccess;
