@@ -17,6 +17,13 @@
 
     public class Startup
     {
+        private static readonly string[] ExcludePaths = new string[]
+        {
+            "api",
+            "instance",
+            "clientconfig"
+        };
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -105,6 +112,22 @@
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.MapWhen(x => !ExcludePaths.Any(path => x.Request.Path.Value.ToLower().StartsWith($"/{path.ToLower()}")), builder =>
+            {
+                app.UseSpa(spa =>
+                {
+                    // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                    // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                    spa.Options.SourcePath = "ClientApp";
+
+                    if (env.IsDevelopment())
+                    {
+                        spa.UseAngularCliServer(npmScript: "start");
+                    }
+                });
+            });
+
             app.UseMvc();
             app.UseSwagger(c =>
             {
@@ -114,19 +137,6 @@
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
-
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
             });
         }
     }
