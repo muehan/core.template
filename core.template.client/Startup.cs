@@ -1,22 +1,20 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using core.template.dataAccess;
+using core.template.services.behaviors.Behaviors;
+using core.template.services.commands.Configuration;
+using MediatR;
+using MediatR.Pipeline;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using StructureMap;
+using Swashbuckle.AspNetCore.Swagger;
 
-namespace core.template.api
+namespace core.template.client
 {
-    using System;
-    using dataAccess;
-    using MediatR;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.AspNetCore.SpaServices.AngularCli;
-    using Swashbuckle.AspNetCore.Swagger;
-    using MediatR.Pipeline;
-    using services.queries.Queries.Customer.Query;
-    using StructureMap;
-    using core.template.services.behaviors.Behaviors;
-    using services.commands.Configuration;
-
     public class Startup
     {
         private static readonly string[] ExcludePaths = new string[]

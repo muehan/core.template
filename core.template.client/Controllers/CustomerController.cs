@@ -1,17 +1,17 @@
-﻿namespace core.template.api.Controllers
-{
-    using System.Collections.Generic;
-    using Microsoft.AspNetCore.Mvc;
-    using MediatR;
-    using System.Threading.Tasks;
-    using domain;
-    using System;
-    using services.commands.Commands.Customer.Create;
-    using services.commands.Commands.Customer.Delete;
-    using services.commands.Commands.Customer.Edit;
-    using services.queries.Queries.Customer.GetAll;
-    using services.queries.Queries.Customer.Query;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using core.template.domain;
+using core.template.services.commands.Commands.Customer.Create;
+using core.template.services.commands.Commands.Customer.Delete;
+using core.template.services.commands.Commands.Customer.Edit;
+using core.template.services.queries.Queries.Customer.GetAll;
+using core.template.services.queries.Queries.Customer.Query;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
+namespace core.template.client.Controllers
+{
     [Route("api/[controller]")]
     public class CustomerController : Controller
     {

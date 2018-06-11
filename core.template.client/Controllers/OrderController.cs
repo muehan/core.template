@@ -1,14 +1,14 @@
-﻿namespace core.template.api.Controllers
-{
-    using domain;
-    using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Threading.Tasks;
-    using MediatR;
-    using System.Collections.Generic;
-    using services.queries.Queries.Order.Get;
-    using services.queries.Queries.Order.GetAll;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using core.template.domain;
+using core.template.services.queries.Queries.Order.Get;
+using core.template.services.queries.Queries.Order.GetAll;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
+namespace core.template.client.Controllers
+{
     [Produces("application/json")]
     [Route("api/Order")]
     public class OrderController : Controller
